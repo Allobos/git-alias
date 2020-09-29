@@ -1,0 +1,107 @@
+ReactJS, Hooks, Recoil, TDD, Clean Architecture, SOLID
+
+SEÇÃO 1: Introdução (2. Configurando o Git)
+
+git config
+-Acessa as configurações do meu git
+
+git config --local
+- Para alterar as configurações locais - configurações apenas do projeto atual criado.
+
+git config --global
+- Para alterar as configurações globais - qualquer projeto do meu usuário.
+
+git config --system
+- Para alterar as configurações de todos os projetos de todos os usuários desta máquina.
+
+==================================
+
+git config --global --edit
+- Para editar utilizando o editor Vi (:q para sair) ou o Visual Studio Code.
+
+git config --global core.editor code
+- Para configurar o Visual Studio Code como editor ao invés do Vi.
+
+==================================
+
+git add .
+- Não pega arquivos modificados que estejam abaixo de aonde eu estou na árvore de diretórios.
+
+git add --all
+- Pega qualquer arquivo modificado, não importa aonde eu esteja na árvore de diretórios do meu projeto.
+
+==================================
+
+git status
+
+git status -s
+- Mostra de forma resumida, o s é de short
+
+==================================
+
+git log --oneline
+- Mostra os commits de forma reduzida mas não mostra a pessoa que fez o commit e nem a data do commit
+
+git log --pretty=format:'%C(blue)%h%C(red)%d %C(white)%s - %C(cyan)%cn, %C(green)%cr'
+- %C(blue) mostra o texto na cor azul
+- %H mostra a hash de forma comprida
+- %h mostra a hash de forma reduzida
+- %d mostra aonde acontece a branch que faz o commit e se tiver tag também ele mostra a tag
+- %s mostra o subject (texto do commit que eu fiz)
+- %cn mostra o commiter name (a pessoa que fez o commit)
+- %cr mostra a data relativa do commit
+
+Obs.: no cmder direto ele não está aceitando espaços. Então:
+git log --pretty=format:'%C(blue)%h%C(red)%d//%C(white)%s//%C(cyan)%cn,%C(green)%cr'
+
+==================================
+
+git commit --amend
+- Junta o commit atual no commit anterior como se as alterações atuais tivessem sido feitas no commit anterior.
+
+==================================
+
+No git temos dois tipos de tag: a tag normal (git tag) e a tag anotada (git tag -a). 
+
+git tag "1.0"
+- Cria uma tag normal no meu projeto. Tags normais devem ser utilizadas para auxiliar-nos no desenvolvimento, marcando o fim de uma etapa - por exemplo.  
+
+git tag
+- Mostra todas as tags do projeto
+
+git tag -a "1.0.1" -m "1.0.1"
+- Sempre utilizar tags anotadas para releases do projeto
+-a anoted
+-m message
+
+===========================
+
+git shortlog -s --grep
+- Para puxarmos estatísticas do projeto
+- o atalho (count = !git shortlog -s --grep) mostra quantos commit eu tenho no meu projeto
+
+Eventional Commits é o padrão de nomenclatura que utilizamos para os commits. Tipos de commits:
+# feat é o commit de uma feature
+# fix é o commit de um bug fix
+# test é o commit de um teste unitário
+# chore é o commit para quando sobe uma biblioteca, uma dependência no projeto
+# docs é o commit de uma documentação do projetos
+
+============================
+
+O arquivo (.gitconfig) de configuração do git ficará (:
+
+[user]
+# Please adapt and uncomment the following lines:
+name = Jonnie
+email = jonnieallobos@hotmail.com
+[core]
+	editor = code --wait
+[push]
+  followTags = true #enviará no push somente as tags anotadas
+[alias]
+c = !git add --all && git commit -m
+s = !git status -s
+l = !git log --pretty=format:'%C(blue)%h%C(red)%d %C(white)%s - %C(cyan)%cn, %C(green)%cr'
+amend = !git add --all && git commit --amend --no-edit
+count = !git shortlog -s --grep
